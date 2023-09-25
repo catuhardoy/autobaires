@@ -1,0 +1,47 @@
+/* revenue.module.css */
+.card {
+    
+    width: 30%; 
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .img{
+   
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .name{
+    margin: 10px 0;
+    font-size: 1.2rem;
+  }
+  
+  .year {
+    margin: 5px 0;
+    font-size: 0.8rem;
+  }
+  
+  .price {
+    margin: 10px 0;
+    font-size: 1rem;
+  }
+   .desc {
+    margin: 5px 0;
+    font-size: 0.8rem;
+  }
+  
+  .button {
+    font-family: 'Montserrat', sans-serif;
+    background-color:black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 30px;
+    
+  }

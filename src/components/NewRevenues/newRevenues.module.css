@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    flex-wrap: wrap; 
+    /* Permite que las tarjetas se envuelvan en una nueva fila si no caben en el ancho de la pantalla */
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+    gap: 20px; /* Espaciado entre las tarjetas */
+    padding: 20px; /* Espaciado interno para el contenedor */
+    
+  }
+  .cards{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Estilos para el título */
+  .title{
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
