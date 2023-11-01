@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './cardPair.module.css'
 import Image from 'next/image'
-
+import Link from 'next/link'
 const CardPair = () => {
   return (
     <div className={styles.container}>
@@ -10,11 +10,12 @@ const CardPair = () => {
         
         <div className={styles.image}>
         </div>  
-        <h2 className={styles.title}>COMPRAR TU AUTO</h2> 
+        <Link href="/form-compra"> <h2 className={styles.title}>COMPRAR TU AUTO</h2> </Link> 
       </div>
       <div className={styles.card}>
         
-        <h2 className={styles.title}>VENDER TU AUTO</h2>
+        <Link href="/form-venta"> <h2 className={styles.title}>VENDER TU AUTO</h2 ></Link>
+       
         
         
       </div>
@@ -25,4 +26,8 @@ const CardPair = () => {
 
 export default CardPair
 
-//poner logo autobaires somwhere
+//poner logo autobaires somwhere 
+
+
+
+

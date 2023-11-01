@@ -1,10 +1,11 @@
 import React from 'react'
 import styles from './revenue.module.css'
+import { Pagination } from '@mui/material'
 
 const Revenue = ({revenue}) => {
 
    return (
-    // <div className={styles.container}>
+    <div className={styles.container}>
     <div className= {styles.card}>
     <img src={revenue.photo} alt={revenue.name} className={styles.img} />   
     <h3 className={styles.name}>{revenue.name}</h3>
@@ -14,10 +15,12 @@ const Revenue = ({revenue}) => {
 
     <div>
         <button className={styles.button}>CONSULTAR</button>
+        
     </div>
     
   </div>
-  // </div>
+  </div>
+  // falta re direccionar al auto especifico con el boton consultar
   
    )
 }

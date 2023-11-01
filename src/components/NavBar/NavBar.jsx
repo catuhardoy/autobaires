@@ -22,11 +22,11 @@ const links = [
         url: '/contacto'
     },
   
-    {
-        id: 4,
-        title: 'NOSOTROS',
-        url: '/nosotros'
-    },
+    // {
+    //     id: 4,
+    //     title: 'NOSOTROS',
+    //     url: '/nosotros'
+    // },
    
 ]
 
@@ -34,7 +34,7 @@ function Navbar() {
   return (
     <div className={styles.container}>
       <Link href='/'>
-      <Image src='/LOGO_AUTOBAIRES_02.png' alt= "autobaires" width={190} height={190} className={styles.logo}/>
+      <Image src='/LOGO_AUTOBAIRES_02.png' alt= "autobaires" width={210} height={210} className={styles.logo}/>
       </Link>
       <div className={styles.links}>
       

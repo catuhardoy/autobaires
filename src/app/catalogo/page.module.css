@@ -1,0 +1,155 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .searchBar {
+    background-color: #dddada;
+    display: flex;
+    align-items: center;
+    width: 100%; 
+    padding: 10px;
+    border-radius: 1px;
+    flex-wrap: wrap;
+  }
+  
+  .input {
+    
+    padding: 10px;
+    border: none;
+    outline: none;
+    flex-grow: 1;
+   
+  }
+  
+  .button {
+        font-family: 'Montserrat', sans-serif;
+        background-color:black;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        margin-left: 10px;
+        border-radius: 1px;
+        
+  }
+
+  .sortContainer{
+    margin-left: auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .sortButton{
+    font-family: 'Montserrat', sans-serif;
+    background-color:rgb(98, 94, 94);
+    color: white;
+    border: black;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    margin-left: 10px;
+    border-radius: 1px;
+    /* margin-bottom: 5px; */
+
+  }
+  .content{
+    display: flex; /* Esto los coloca en una fila */
+    justify-content: space-between; /* Espacio entre los elementos */
+    width: 100%; /* Ocupar todo el ancho disponible */
+   
+    
+  }
+
+  .column {
+    width: 20%;
+    padding: 0 15px ;
+    border-radius: 1px;
+    margin-top: 20px;
+    border: 1px solid black
+  }
+
+  .cardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+  }
+  
+  .carCards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+  }
+  
+  .card {
+    width: 100%; /* Esto asegura que haya 3 cartas por fila con espacio entre ellas */
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    /* border: 1px black solid; */
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    text-align: center;
+    background-color: #fff;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px); /* Efecto de elevación en hover */
+    /* box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2); */
+  }
+  
+  .img{
+   
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .name{
+    margin: 10px 0;
+    font-size: 1.2rem;
+  }
+  
+  .year {
+    margin: 5px 0;
+    font-size: 0.8rem;
+  }
+  
+  .price {
+    margin: 10px 0;
+    font-size: 1rem;
+  }
+   .desc {
+    margin: 5px 0;
+    font-size: 0.8rem;
+  }
+  
+  @media (min-width: 600px) {
+  .card {
+      width: calc(50% - 20px); /* 2 tarjetas por fila */
+  }
+}
+
+/* Estilos para escritorio */
+@media (min-width: 900px) {
+  .card {
+      width: calc(33.33% - 20px); /* 3 tarjetas por fila */
+  }
+}
+
+@media (max-width: 768px) {
+  .input,
+  .button,
+  .sortButton {
+      width: 100%;  /* Hacer que los elementos ocupen todo el ancho */
+      margin-top: 5px;  /* Añadir un pequeño margen superior para separación */
+  }
+  
+  .sortContainer {
+      margin-left: 0;  /* Reset del margen izquierdo para la alineación */
+  }
+}
+  

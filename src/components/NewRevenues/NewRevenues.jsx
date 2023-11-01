@@ -56,6 +56,7 @@ const NewRevenues = () => {
   
   return (
     <div className={styles.container}>
+      
       <h2 className={styles.title}>Últimos Ingresos</h2>
       <div className={styles.cards}>
         {recentRevenues.map((revenue) => (

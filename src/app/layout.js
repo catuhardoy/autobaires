@@ -3,6 +3,9 @@ import './globals.css'
 import { Montserrat } from 'next/font/google'
 import styles from './globals.css'
 import Footer from '@/components/Footer/Footer'
+import FloatingMenu from '@/components/FloatingMenu/FloatingMenu'
+import AuthProvider from '@/providers/AuthProvider'
+
 
 const inter = Montserrat({ subsets: ['latin'] })
 
@@ -15,12 +18,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <AuthProvider>
         <div className={styles.container}>
 
         <Navbar/>
+        <FloatingMenu/>
         {children}
         <Footer/>
         </div>
+        </AuthProvider>
         </body>
     </html>
   )

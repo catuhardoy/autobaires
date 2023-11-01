@@ -1,0 +1,72 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 20px;
+  }
+  
+  .left, .right {
+    flex: 2;
+    min-width: 250px; /* Ajusta según tus necesidades */
+  }
+  
+  .item {
+    margin-bottom: 20px;
+  }
+  
+  .img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex:1;
+    /* margin-left: 15px; */
+  }
+  
+  .logo {
+   
+  }
+  
+  .name, .year, .km, .desc, .price {
+    margin-bottom: 15px;
+    /* text-align:center */
+  }
+  
+  .button, .buttonBack {
+    padding: 10px;
+   
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .button {
+        font-family: 'Montserrat', sans-serif;
+        background-color:black;
+        color: white;
+        border: none;
+  }
+  
+  .buttonBack {
+    background-color: #555555; /* Dark Grey */
+    color: white;
+  }
+  
+  @media (max-width: 600px) {
+    .container {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .content, .left, .right {
+        margin-left: 0; /* Remueve el margen cuando la pantalla es pequeña */
+        align-items: center; /* Asegúrate de que el contenido esté centrado en pantallas pequeñas */
+      }
+    
+  }
+  

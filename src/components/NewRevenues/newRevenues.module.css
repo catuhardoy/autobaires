@@ -1,6 +1,7 @@
 .container {
     display: flex;
     flex-wrap: wrap; 
+    align-items: center;
     /* Permite que las tarjetas se envuelvan en una nueva fila si no caben en el ancho de la pantalla */
     justify-content: center; /* Centra las tarjetas horizontalmente */
     gap: 20px; /* Espaciado entre las tarjetas */

@@ -2,18 +2,20 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    height: 100vh; 
+    height: 100vh;  
+    width: 100vw;
   }
 
 .cardPair {
     display: flex;
-    /* justify-content: space-between; */
-    max-width: 1000px;
+    justify-content: space-between;
     width: 70%; 
+    margin: 0 auto; 
+    
   }
 
   .card:hover {
-    opacity: 0.7; 
+    opacity: 1; 
     box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
   }
 
@@ -25,60 +27,41 @@
     width: 48%;
     height: 500px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px auto; 
     text-align: center;
-    margin: 10px;
     background-image: url('/card.jpg');
     background-size: cover;
     background-position: center;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 81%);
     cursor: pointer;
-    transition: opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out, width 0.2s ease-in-out;
+    background-color: rgba(255, 255, 255, 0.7);
+    opacity: 0.8
   }
   
 
   .title {
     position: absolute;
     top: 20px;
-    left: 130px;
+    left: 30%;
     color: white;
-    font-size: 20px;
-    z-index: 2;
+    font-size: 1.3em;
+    z-index: 1;
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)); 
     padding: 10px;
-    
+    margin: 0 auto; 
+    /* transition: left 0.2s ease-in-out; */
+  
+    ;
   } 
 
-
-    /* .card {
-    position: relative;
-    border: 1px solid #ccc;
-    padding: 20px;
-    width: 48%;
-    height: 500px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin: 10px;
-    background-image: url('/card.jpg'); 
-    background-size: cover; 
-    background-position: center; 
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 81%);
-    cursor: pointer; 
-    transition: opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-   
-  } */
-
-  /* .title{
-    position: absolute; 
-    bottom: 20px; 
-    left: 20px; 
-    color: black;
-    font-size: 20px; 
-    z-index: 2; 
-    background-color: rgba(0, 0, 0, 0.5); 
-  padding: 10px; 
-  border-radius: 5px; 
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); 
+  @media (max-width: 768px) {
+    .card {
+      width: 80%; /* Cambia el ancho de la tarjeta en pantallas más pequeñas */
+    }
   
+    .title {
+      left: 20px; /* Ajusta la posición izquierda del título en pantallas más pequeñas */
+      transform: none; /* Elimina la transformación en pantallas más pequeñas */
+    }
   }
-   */
-
