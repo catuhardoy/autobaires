@@ -11,6 +11,10 @@
     padding: 15px;
     z-index: 2;
   }
+
+.none {
+  display: none;
+}
   
     .icons:hover {
         transform: scale(1.1) ; 

@@ -1,5 +1,3 @@
-
-import Navbar from '@/components/NavBar/NavBar'
 import styles from './page.module.css'
 import ImageSlider from '@/components/ImageSlider/ImageSlider'
 import CardPair from '@/components/CardPair/CardPair'

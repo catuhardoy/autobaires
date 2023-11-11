@@ -1,12 +1,19 @@
+'use client'
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 import styles from './floatingMenu.module.css'
 
 function FloatingMenu() {
+
+  const path = usePathname();
+  //console.log(path);
+
   return (
-    <div className={styles.container}>
+    <div className={path.includes('admin') ? styles.none : styles.container}>
        <Link href='http://wa.me/qr/A2RTH4IJVTBQA1' target="_blank" rel="noopener noreferrer">
           <div>
             <Image src='/whatsapp.png' alt='wp' width={35} height={35}className={styles.icons}/>
