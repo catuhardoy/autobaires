@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+}
+
+.sidenav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 48px;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.link:hover {
+    background-color: skyblue;
+}
+
+.logo{
+    flex-direction: column;
+    align-items: center;
+    margin-left: 30px;
+    text-decoration: none;
+    
+}
+.exit_link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 48px;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 15px;
+}
+.exit_link:hover {
+    background-color: skyblue;
+}
