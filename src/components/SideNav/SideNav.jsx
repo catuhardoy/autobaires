@@ -11,15 +11,14 @@ export default function SideNav() {
       <div className={styles.sidenav}>
         <NavLinks />
       </div>
-        {/* <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div> */}
       
-      <a 
+      <Link 
       key={'exit'}
       href={'/'}
       className={styles.exit_link} >
           <ExitToAppIcon fontSize='small' />
           <p>Salir</p>
-      </a>
+      </Link>
       
     </div>
   );
