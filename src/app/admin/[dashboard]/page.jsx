@@ -1,10 +1,18 @@
-import React from 'react'
+'use client'
+
+import React from 'react';
+import styles from './dashboard.module.css'
 
 function Dashboard() {
   return (
-    <div>
+    <div className={styles.dashboard}>
       dashboard
-      ver todos los productos
+        <div className={styles.item}>
+          un auto
+        </div>
+        <div className={styles.item}>
+          otro auto
+        </div>
     </div>
   )
 }
