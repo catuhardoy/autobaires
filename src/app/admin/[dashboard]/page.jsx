@@ -6,7 +6,7 @@ import styles from './dashboard.module.css'
 function Dashboard() {
   return (
     <div className={styles.dashboard}>
-      dashboard
+      <h3>Inventario de productos</h3>
         <div className={styles.item}>
           un auto
         </div>

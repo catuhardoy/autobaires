@@ -16,8 +16,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={montserrat.className}>
+    <html lang="en" className={montserrat.className}>
+      <body >
         <AuthProvider>
         <div className={styles.container}>
         <Navbar/>

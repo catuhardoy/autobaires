@@ -20,29 +20,30 @@ const Admin = () => {
   
     return (
       <div className={styles.container}>
+        <h2>Acceso para administradores</h2>
         <div className={styles.box}>
-        <div className={styles.logo}>
-        <Image src = '/LOGO_AUTOBAIRES_03.png' alt='autobaires' width={120} height={120} className= {styles.logo}/>
-        </div>
-        <div className={styles.inputContainer}>
-        <input
-          type="email"
-          placeholder="Correo electrónico"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className={styles.input}
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className={styles.input}
-        />
-        <button onClick={handleLogin} className={styles.button}>
-          Iniciar sesión
-        </button>
-        </div>
+          <div className={styles.logo}>
+            <Image src = '/LOGO_AUTOBAIRES_03.png' alt='autobaires' width={150} height={150} />
+          </div>
+          <div className={styles.inputContainer}>
+            <input
+              type="email"
+              placeholder="Correo electrónico"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={styles.input}
+            />
+            <input
+              type="password"
+              placeholder="Contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={styles.input}
+            />
+            <button onClick={handleLogin} className={styles.button}>
+              Iniciar sesión
+            </button>
+          </div>
         </div>
       </div>
     );
