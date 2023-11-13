@@ -10,16 +10,16 @@ export default function SideNav() {
     <div className={styles.container}>
       <div className={styles.sidenav}>
         <NavLinks />
+        <Link 
+        key={'exit'}
+        href={'/'}
+        className={styles.exit_link} >
+            <ExitToAppIcon fontSize='small' />
+            <p>Salir</p>
+        </Link>
       </div>
       
-      <Link 
-      key={'exit'}
-      href={'/'}
-      className={styles.exit_link} >
-          <ExitToAppIcon fontSize='small' />
-          <p>Salir</p>
-      </Link>
       
     </div>
   );
-}
+};
