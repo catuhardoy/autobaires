@@ -1,20 +1,19 @@
-'use client'
-
 import React from 'react';
+import { Suspense } from 'react';
+import { fetchCars } from '@/libs/data';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 import styles from './dashboard.module.css'
+import Inventory from '@/components/Inventory/Inventory';
 
-function Dashboard() {
+export default async function Dashboard() {
+  
+  const data = await fetchCars();
+
   return (
-    <div className={styles.dashboard}>
-      <h3>Inventario de productos</h3>
-        <div className={styles.item}>
-          un auto
-        </div>
-        <div className={styles.item}>
-          otro auto
-        </div>
-    </div>
-  )
-}
-
-export default Dashboard
+    <Suspense fallback={<div>Cargando...</div>}>
+      <Inventory data={ data.cars }/>
+    </Suspense>
+    
+  );
+};
