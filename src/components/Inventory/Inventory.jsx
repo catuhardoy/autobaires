@@ -82,10 +82,11 @@ export default function Inventory({data}) {
             onClose={() => setOpen(false)}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
+            disableScrollLock={true}
             >
                 <DialogContent>
                 <DialogTitle id="alert-dialog-title">
-                    {"¿Estas seguro de eliminar este archivo?"}
+                    {"¿Estas seguro de eliminar este producto?"}
                 </DialogTitle>
                 <DialogActions>
                     <Button onClick={() => setOpen(false)} autoFocus>Volver</Button>
