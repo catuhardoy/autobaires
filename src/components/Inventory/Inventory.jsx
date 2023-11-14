@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { deleteCar, fetchCars } from '@/libs/data';
 import { useState, useLayoutEffect , useEffect } from 'react';
 import { Pagination, Stack } from '@mui/material';
@@ -15,6 +16,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import styles from './Inventory.module.css';
 
 export default function Inventory({data}) {
+
+    const router = useRouter();
 
     const [open, setOpen] = useState(false);
     const [deleteID, setDeleteID] = useState('')
@@ -32,13 +35,11 @@ export default function Inventory({data}) {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = inventory.slice(indexOfFirstItem, indexOfLastItem);
 
-    /* useLayoutEffect(() => {
-        async function fetching() {
-            const data = await fetchCars();
-            setInventory(data.cars);
-        };
-        fetching();
-    }, []) */
+    useEffect(() => {
+        setInventory(data);
+        setOpen(false);
+        setDeleteID('');
+    }, [data]);
 
     console.log(inventory);
 
@@ -48,9 +49,7 @@ export default function Inventory({data}) {
 
     const handleDelete = async (e) => {
         //e.preventDefault;
-        
-        console.log('delete function');
-        await deleteCar(deleteID);
+        await deleteCar(deleteID).then(() => router.refresh()); //Actualiza la ruta hacia la misma pagina para volver a hacer el fetching de datos
     };
 
     return (

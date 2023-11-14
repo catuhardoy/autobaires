@@ -22,14 +22,17 @@ export async function deleteCar(id) {
 
         const res = await fetch('http://localhost:3000/api/cars', {
             method: 'DELETE',
-            body: JSON.stringify(id),
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({id}),
         });
-        console.log(res);
-        return (
+        console.log(res.json());
+        /* return (
             <Stack sx={{ width: '100%' }} spacing={2}>
                 <Alert severity="info">Se ha borrado el producto con exito.</Alert>
             </Stack>
-          );
+          ); */
     } 
     catch (error) {
         console.log(error);
