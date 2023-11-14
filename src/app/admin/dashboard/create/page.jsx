@@ -125,8 +125,7 @@ function CarCreate() {
   
     return (
       <div className={styles.container}>
-        <div className={styles.box}>
-        <h1 className={styles.title}>AGREGAR AUTO</h1>
+        <h2 className={styles.title}>AGREGAR NUEVA UNIDAD</h2>
       <form onSubmit = {hanldleSubmit} className={styles.form}>
           
           <input
@@ -159,6 +158,16 @@ function CarCreate() {
           
           />
   
+          <input
+          onChange={(e) => setPrice(e.target.value)} 
+          value = {price}
+          className={styles.input} 
+          type="text" 
+          placeholder='Price'
+          id= 'price'
+          
+          />
+          
           <input 
           onChange={(e) => setDescription(e.target.value)} 
           value = {description}
@@ -168,15 +177,6 @@ function CarCreate() {
           id= 'description' 
           />
 
-<input
-          onChange={(e) => setPrice(e.target.value)} 
-          value = {price}
-          className={styles.input} 
-          type="text" 
-          placeholder='Price'
-          id= 'price'
-          
-          />
            <input
             className={styles.input}
             type="file"
@@ -190,11 +190,11 @@ function CarCreate() {
           <button className={styles.btn} 
                   type = "submit" > 
           
-          ADD</button>
+          AGREGAR</button>
       </form>
   
   
-        </div>
+        
       </div>
     )
   }

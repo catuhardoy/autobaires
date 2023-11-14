@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import { fetchCars } from '@/libs/data';
+import { deleteCar, fetchCars } from '@/libs/data';
 import { useState, useLayoutEffect , useEffect } from 'react';
 import { Pagination, Stack } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -17,9 +17,12 @@ import styles from './Inventory.module.css';
 export default function Inventory({data}) {
 
     const [open, setOpen] = useState(false);
+    const [deleteID, setDeleteID] = useState('')
   
-    const handleClickOpen = () => {
+    const handleClickOpen = (id) => {
         setOpen(true);
+        setDeleteID(id);
+        console.log(id);
     };
     
     const [inventory, setInventory] = useState(data);
@@ -43,11 +46,11 @@ export default function Inventory({data}) {
         setCurrentPage(newPage);
     };
 
-    const handleDelete = (e) => {
+    const handleDelete = async (e) => {
         //e.preventDefault;
         
         console.log('delete function');
-        console.log(e);
+        await deleteCar(deleteID);
     };
 
     return (
@@ -60,7 +63,7 @@ export default function Inventory({data}) {
                     <p>Km: {item.km}</p>
                     <p>Año: {item.year}</p>
                     <p>$ {item.price}</p>
-                    <IconButton onClick={() => handleClickOpen()}>
+                    <IconButton onClick={() => handleClickOpen(item._id)}>
                         <DeleteIcon/>
                     </IconButton>
                 </div>
@@ -79,7 +82,10 @@ export default function Inventory({data}) {
 
             <Dialog
             open={open}
-            onClose={() => setOpen(false)}
+            onClose={() => {
+                setOpen(false);
+                setDeleteID('');
+            }}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
             disableScrollLock={true}

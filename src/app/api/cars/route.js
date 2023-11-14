@@ -1,6 +1,7 @@
 import connectMongoDB from '@/libs/mongodb';
 import Car from '@/app/models/car';
-import { NextResponse } from "next/server";
+import { NextResponse , NextRequest } from "next/server";
+import { NextApiRequest, NextApiResponse } from 'next';
 // import multer from 'multer';
 
 export async function POST(request) {
@@ -20,9 +21,17 @@ export async function GET() {
     return NextResponse.json({ cars });
   }
 
-export async function DELETE(request) {
-    const id = request.nextUrl.searchParams.get('id');
+/* export async function DELETE(request) {
+    const id = request.nextUrl.searchParams.get('id') || request.body.id;
 
+    await connectMongoDB() ;
+    await Car.findByIdAndDelete(id);
+
+    return NextResponse.json({message: "Car Deleted"}, {status: 200})
+} */
+
+export async function DELETE(request) {
+    const {id} = await request.json()
     await connectMongoDB() ;
     await Car.findByIdAndDelete(id);
 
