@@ -31,11 +31,11 @@ export async function GET() {
 } */
 
 export async function DELETE(request) {
-    const {id} = await request.json()
+    const {id} = await request.json();
     await connectMongoDB() ;
     await Car.findByIdAndDelete(id);
 
-    return NextResponse.json({message: "Car Deleted"}, {status: 200})
+    return NextResponse.json({message: "Car Deleted", status: 200})
 }  
 
 
