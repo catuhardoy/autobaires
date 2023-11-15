@@ -36,7 +36,29 @@ export async function deleteCar(id) {
     } 
     catch (error) {
         console.log(error);
-        throw new Error('Failed to fetch data');
+        throw new Error('Failed to delete data');
+    };
+
+};
+
+export async function uploadImage(file) {
+    
+    try {
+        //await new Promise(resolve => setTimeout(resolve, 5000));
+
+        const formData = new FormData();
+        formData.append('images', file);
+
+        const res = await fetch('http://localhost:3000/api/upload', {
+            method: 'POST',
+            body: formData,
+        });
+        //console.log(res);
+        return await res.json();
+    } 
+    catch (error) {
+        console.log(error);
+        throw new Error('Failed to upload data');
     };
 
 };

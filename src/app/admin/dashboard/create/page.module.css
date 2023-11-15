@@ -90,6 +90,12 @@
     top: 10px;
   }
 
+  .image_imput {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
   .btn {
     background-color: black;
     color: white;
