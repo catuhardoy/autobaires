@@ -4,7 +4,10 @@ import React from 'react'
 import {useState} from 'react';
 import {useRouter} from 'next/navigation';
 import { uploadImage, uploadImages } from '@/libs/data';
-import Button from '@mui/material/Button';
+import LinearProgress from '@mui/material/LinearProgress';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ErrorIcon from '@mui/icons-material/Error';
+import Box from '@mui/material/Box';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import styles from './page.module.css'
 
@@ -31,6 +34,13 @@ function CarCreate() {
   const router = useRouter()
 
   const handleImagesChange = (e) => {
+    setImages([]);
+    setUploadStatus({
+      loading: false,
+      error: false,
+      succesfull: false,
+      message: '',
+    });
     setImages(e.target.files);
   };
   //console.log([...images]);
@@ -48,19 +58,19 @@ function CarCreate() {
     
     Promise.all(res).then((res) => {
       console.log(res);
-      setPhotoURLs(res.map((item) => item.url))
+      setPhotoURLs(res.map((item) => item.url));
       setUploadStatus({
         loading: false,
         error: false,
         succesfull: true,
-        message: 'Carga exitosa',
+        message: 'Carga exitosa!',
       });
     }).catch((err) => {
       setUploadStatus({
         loading: false,
         error: true,
         succesfull: false,
-        message: 'Ha ocurrido un error',
+        message: 'Ha ocurrido un error!',
       });
     });
 
@@ -93,8 +103,9 @@ function CarCreate() {
       });
 
       if(res.ok){
-        //router.push('/catalogo');
-        console.log('Auto creado')
+        router.refresh();
+        router.push('/admin/dashboard');
+        console.log('Auto creado');
       }else{
         throw new Error ('No se creo el auto')
       }
@@ -164,21 +175,27 @@ function CarCreate() {
         placeholder='Descripción'
         id= 'description' 
         />
-
-        <label htmlFor='photo' className={styles.image_input}>
-          <input
-          className={styles.input}
-          type="file"
-          accept=".jpg, .jpeg, .png"
-          id="photo"
-          multiple onChange={handleImagesChange}
-          /> 
-          <button className={styles.btn} onClick={handleUploadImage}>
-            <p>Cargar</p>
-            <CloudUploadIcon /></button>
-        </label>
-        <div className={uploadStatus.message ? styles.status : styles.hidden}>
-          <p>{uploadStatus.message}</p>
+        <div className={styles.upload_section}>
+          <label htmlFor='photo' className={styles.image_input}>
+            <input
+            className={styles.input}
+            type="file"
+            accept=".jpg, .jpeg, .png"
+            id="photo"
+            multiple onChange={handleImagesChange}
+            /> 
+            <button disabled={uploadStatus.succesfull} className={uploadStatus.succesfull ? styles.disabled_btn : styles.upload_btn} onClick={handleUploadImage}>
+              {uploadStatus.succesfull && <CheckCircleIcon/>}
+              {uploadStatus.error && <ErrorIcon/>}
+              {!uploadStatus.succesfull && !uploadStatus.error && <div><p>Cargar</p><CloudUploadIcon /></div>}
+            </button>
+          </label>
+          <div className={uploadStatus.message ? styles.status : styles.hidden}>
+            <p>{uploadStatus.message}</p>
+            {uploadStatus.loading && <Box sx={{ width: '100%' }}>
+              <LinearProgress />
+            </Box>}
+          </div>
         </div>
         
         <button className={styles.btn} type = "submit" >AGREGAR</button>
