@@ -1,16 +1,25 @@
 'use client'
 
 import React from 'react'
-import styles from './page.module.css'
 import {useState} from 'react';
 import {useRouter} from 'next/navigation';
-import { uploadImage } from '@/libs/data';
+import { uploadImage, uploadImages } from '@/libs/data';
+import Button from '@mui/material/Button';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import styles from './page.module.css'
 
 
 function CarCreate() {
 
+  const [uploadStatus, setUploadStatus] = useState({
+    loading: false,
+    error: false,
+    succesfull: false,
+    message: '',
+  });
   
-  const [name, setName] = useState('');
+  const [brand, setBrand] = useState('');
+  const [model, setModel] = useState('');
   const [year, setYear] = useState('');
   const [km, setKm] = useState('');
   const [description, setDescription] = useState('');
@@ -28,20 +37,47 @@ function CarCreate() {
 
   const handleUploadImage = async (e) => {
     e.preventDefault();
+    setUploadStatus({
+      loading: true,
+      error: false,
+      succesfull: false,
+      message: 'Procesando imagenes...',
+    });
 
-    [...images].map(async (file) => {
+    const res = await uploadImages(images);
+    
+    Promise.all(res).then((res) => {
+      console.log(res);
+      setPhotoURLs(res.map((item) => item.url))
+      setUploadStatus({
+        loading: false,
+        error: false,
+        succesfull: true,
+        message: 'Carga exitosa',
+      });
+    }).catch((err) => {
+      setUploadStatus({
+        loading: false,
+        error: true,
+        succesfull: false,
+        message: 'Ha ocurrido un error',
+      });
+    });
+
+
+    /* [...images].map(async (file) => {
       const res = await uploadImage(file);
       setPhotoURLs((prev)=> [...prev, res.url]);
-      //console.log(res);
-    });
+      console.log(res);
+    }); */
   };
-  console.log(photoURLs);
+  //console.log(photoURLs);
   
   
   const hanldleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !year ||!km || !description || !price ) {
+    if (!brand || !model || !year ||!km || !description || !price ) {
       alert ('Todos los campos son requeridos');
       return;
     };
@@ -53,7 +89,7 @@ function CarCreate() {
         headers:{
           'Content-Type': 'application/json'
         },
-        body:JSON.stringify({name, year,km, description, price, photos: photoURLs})
+        body:JSON.stringify({name: brand, year,km, description, price, photoURLs})
       });
 
       if(res.ok){
@@ -76,12 +112,21 @@ function CarCreate() {
       <form onSubmit = {hanldleSubmit} className={styles.form}>
         
         <input
-        onChange={(e) => setName(e.target.value)} 
-        value = {name}
+        onChange={(e) => setBrand(e.target.value)} 
+        value = {brand}
         className={styles.input} 
         type="text" 
-        placeholder='Nombre'
-        id= 'name'
+        placeholder='Marca'
+        id= 'brand'
+        />
+
+        <input
+        onChange={(e) => setModel(e.target.value)} 
+        value = {model}
+        className={styles.input} 
+        type="text" 
+        placeholder='Modelo'
+        id= 'model'
         />
 
         <input
@@ -120,7 +165,7 @@ function CarCreate() {
         id= 'description' 
         />
 
-        <label htmlFor='photo' className={styles.image_imput}>
+        <label htmlFor='photo' className={styles.image_input}>
           <input
           className={styles.input}
           type="file"
@@ -128,9 +173,13 @@ function CarCreate() {
           id="photo"
           multiple onChange={handleImagesChange}
           /> 
-          <button className={styles.btn} onClick={handleUploadImage}>Cargar</button>
-
+          <button className={styles.btn} onClick={handleUploadImage}>
+            <p>Cargar</p>
+            <CloudUploadIcon /></button>
         </label>
+        <div className={uploadStatus.message ? styles.status : styles.hidden}>
+          <p>{uploadStatus.message}</p>
+        </div>
         
         <button className={styles.btn} type = "submit" >AGREGAR</button>
     </form>

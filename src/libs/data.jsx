@@ -27,7 +27,7 @@ export async function deleteCar(id) {
             },
             body: JSON.stringify({id}),
         });
-        console.log(res.json());
+        //console.log(res.json());
         /* return (
             <Stack sx={{ width: '100%' }} spacing={2}>
                 <Alert severity="info">Se ha borrado el producto con exito.</Alert>
@@ -44,8 +44,6 @@ export async function deleteCar(id) {
 export async function uploadImage(file) {
     
     try {
-        //await new Promise(resolve => setTimeout(resolve, 5000));
-
         const formData = new FormData();
         formData.append('images', file);
 
@@ -53,8 +51,34 @@ export async function uploadImage(file) {
             method: 'POST',
             body: formData,
         });
-        //console.log(res);
+        console.log(res);
         return await res.json();
+    } 
+    catch (error) {
+        console.log(error);
+        throw new Error('Failed to upload data');
+    };
+
+};
+
+export async function uploadImages(files) {
+    
+    try {
+        const response = [...files].map(async (file) => {
+            
+            const formData = new FormData();
+            formData.append('images', file);
+    
+            const res = await fetch('http://localhost:3000/api/upload', {
+                method: 'POST',
+                body: formData,
+            });
+            console.log(res);
+            return await res.json();
+        });
+
+        //return Promise.all(response);
+        return response;
     } 
     catch (error) {
         console.log(error);

@@ -42,7 +42,7 @@ export async function POST(request) {
         }).end(buffer);
     });
 
-    //Almacenar links en la bdd - pendiente
+    //Almacenar links en la bdd - pendiente ver si lo manejamos desde aca o desde el componento del front
 
     return NextResponse.json({
         message: 'Succesfully upload',
