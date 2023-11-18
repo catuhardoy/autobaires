@@ -2,9 +2,12 @@ import React from 'react'
 
 const Video = () => {
   return (
-    <div>
-      <h1>aca deberia ir un video con el logo</h1>
-    </div>
+    <div style={{ width: '100vw'  }}>
+    <video control width="100%" height={600} autoPlay muted loop controls>
+      <source src="AutobairesVideo.mp4" type="video/mp4" />
+      
+    </video>
+  </div>
   )
 }
 
