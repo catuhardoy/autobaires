@@ -134,6 +134,7 @@
     justify-content: center;
     background-color: black;
     color: white;
+    height: 40px;
     padding: 10px 20px;
     border: none;
     border-radius: 10px;
@@ -181,6 +182,9 @@
   }
   .upload_btn p {
     margin: auto 0px;
+  }
+  .upload_btn:hover {
+    background-color: darkblue;
   }
 
   .btn:hover {

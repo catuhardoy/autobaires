@@ -1,4 +1,12 @@
+import { ObjectId } from "mongodb";
 import mongoose, {Schema} from "mongoose";
+
+const imageSchema = new Schema(
+    {
+        url: { type: String },
+        filename: { type: String }
+    }
+);
 
 const carSchema = new Schema(
     {
@@ -19,10 +27,7 @@ const carSchema = new Schema(
         type: String
     },
 
-    photoURLs:
-    [{
-        type: String
-    }]  // Array de URLs
+    photoURLs: [imageSchema]  // Array de Objets
 }, 
 
     {timestamps: true}

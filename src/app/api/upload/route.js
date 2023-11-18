@@ -42,10 +42,13 @@ export async function POST(request) {
         }).end(buffer);
     });
 
+    console.log(response);
+
     //Almacenar links en la bdd - pendiente ver si lo manejamos desde aca o desde el componento del front
 
     return NextResponse.json({
         message: 'Succesfully upload',
-        url: response.secure_url
+        id: response.public_id,
+        url: response.secure_url,
     });
 };

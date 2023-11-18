@@ -217,7 +217,7 @@ const handleChangePage = (event, newPage) => {
                    
                     <Link href = {`/catalogo/${car._id}`}>
                     {/* <img src={car.photo} alt={car.name} className={styles.img} />   */}
-                     <img src={car.photoURLs.length ? car.photoURLs[0] : 'https://images.pexels.com/photos/707046/pexels-photo-707046.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'} alt={car.name} className={styles.img} />  
+                     <img src={car.photoURLs.length ? car.photoURLs[0].url : 'https://images.pexels.com/photos/707046/pexels-photo-707046.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'} alt={car.name} className={styles.img} />  
                     <h3 className={styles.brand}>{car.name}</h3>
                     <p className={styles.description}> {car.description}</p>
                     <p className={styles.km}>Km: {car.km}</p>
