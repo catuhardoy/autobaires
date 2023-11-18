@@ -8,7 +8,7 @@ import PopUp from '../PopUp/PopUp'
 const ImageSlider = () => {
 
 const [currentSlide, setCurrentSlide] = useState(0);
-const images = ['/auto1.jpg', '/auto2.jpg', '/auto3.jpg'];
+const images = [ 'DSC_2435.jpg','DSC_2649.jpg','DSC_2590.jpg'];
 const totalSlides = images.length;
 
 

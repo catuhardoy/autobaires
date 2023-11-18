@@ -12,7 +12,7 @@ const CardPair = () => {
         </div>  
         <Link href="/form-compra"> <h2 className={styles.title}>COMPRAR TU AUTO</h2> </Link> 
       </div>
-      <div className={styles.card}>
+      <div className={styles.cardtwo}>
         
         <Link href="/form-venta"> <h2 className={styles.title}>VENDER TU AUTO</h2 ></Link>
        
