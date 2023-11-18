@@ -5,18 +5,35 @@
     padding: 20px;
   }
   
-  .left, .right {
+  .right {
     flex: 2;
-    min-width: 250px; /* Ajusta según tus necesidades */
+    min-width: 200px; 
+    height: 500px;
   }
-  
+  .left{
+    flex: 2;
+    min-width: 200px; 
+    height: 500px;
+    margin-top: 20px;
+  }
   .item {
     margin-bottom: 20px;
   }
+
+  /* .imgContainer{
+    position: relative;
+    height: 100%;
+  } */
   
   .img {
-    width: 100%;
-    height: auto;
+  width: 100%; 
+  height: 550px;
+  max-width: 600px; 
+  max-height: 400px; 
+  display: block; 
+  margin: auto; 
+  margin-left: 60px;
+  object-fit: conver
   }
   
   .content {
@@ -31,15 +48,38 @@
   .logo {
    
   }
+
+  .thumbnailContainer {
+    display: flex;
+    margin-top: 10px;
+    margin-left: 50px;
+  }
   
-  .name, .year, .km, .desc, .price {
+  .thumbnail {
+    width: 60px;
+    height: 60px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  
+  .title{
+    font-weight: bold;
+  }
+  
+  .name, .year, .km, .desc{
     margin-bottom: 15px;
+   
     /* text-align:center */
+  }
+  .price{
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 40px;
+
   }
   
   .button, .buttonBack {
     padding: 10px;
-   
     border: none;
     cursor: pointer;
     width: 100%;
