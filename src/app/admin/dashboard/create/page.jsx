@@ -5,21 +5,27 @@ import {useState} from 'react';
 import {useRouter} from 'next/navigation';
 import { uploadImage, uploadImages } from '@/libs/data';
 import LinearProgress from '@mui/material/LinearProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorIcon from '@mui/icons-material/Error';
+import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import Alert from '@mui/material/Alert';
 import styles from './page.module.css'
 
 
 function CarCreate() {
 
-  const [uploadStatus, setUploadStatus] = useState({
+  const INITIAL_STATE = {
     loading: false,
     error: false,
     succesfull: false,
     message: '',
-  });
+  };
+
+  const [uploadStatus, setUploadStatus] = useState(INITIAL_STATE);
+  const [createStatus, setCreateStatus] = useState(INITIAL_STATE);
   
   const [brand, setBrand] = useState('');
   const [model, setModel] = useState('');
@@ -31,22 +37,30 @@ function CarCreate() {
   const [photoURLs, setPhotoURLs] = useState([]);
    
 
-  const router = useRouter()
+  const router = useRouter();
+
+  const resetForm = () => {
+    setBrand('');
+    setModel('');
+    setYear('');
+    setKm('');
+    setDescription('');
+    setPrice('');
+    setUploadStatus(INITIAL_STATE);
+    setCreateStatus(INITIAL_STATE);
+  };
 
   const handleImagesChange = (e) => {
     setImages([]);
-    setUploadStatus({
-      loading: false,
-      error: false,
-      succesfull: false,
-      message: '',
-    });
+    setUploadStatus(INITIAL_STATE);
     setImages(e.target.files);
   };
   //console.log([...images]);
 
   const handleUploadImage = async (e) => {
     e.preventDefault();
+
+    if(!images.length || !images) return alert ('Debes seleccionar una imagen');
     setUploadStatus({
       loading: true,
       error: false,
@@ -58,7 +72,12 @@ function CarCreate() {
     
     Promise.all(res).then((res) => {
       console.log(res);
-      setPhotoURLs(res.map((item) => item.url));
+      setPhotoURLs(res.map((item) => {
+        return {
+          filename: item.id,
+          url: item.url
+        }
+      }));
       setUploadStatus({
         loading: false,
         error: false,
@@ -88,30 +107,61 @@ function CarCreate() {
     e.preventDefault();
 
     if (!brand || !model || !year ||!km || !description || !price ) {
-      alert ('Todos los campos son requeridos');
+      setCreateStatus({
+        loading: false,
+        error: true,
+        succesfull: false,
+        message: 'Debe completar todos los campos.',
+      });
+      setTimeout(() => {
+        setCreateStatus(INITIAL_STATE);
+      }, 3000);
+      //alert ('Todos los campos son requeridos');
       return;
     };
+
+    setCreateStatus({
+      loading: true,
+      error: false,
+      succesfull: false,
+      message: '',
+    });
       
-  
     try{
       const res = await fetch('http://localhost:3000/api/cars', {
         method: 'POST',
         headers:{
           'Content-Type': 'application/json'
         },
-        body:JSON.stringify({name: brand, year,km, description, price, photoURLs})
+        body:JSON.stringify({name: brand, model, year, km, description, price, photoURLs})
       });
 
-      if(res.ok){
-        router.refresh();
-        router.push('/admin/dashboard');
-        console.log('Auto creado');
+      if(res.ok) {
+        setCreateStatus({
+          loading: false,
+          error: false,
+          succesfull: true,
+          message: 'Nueva unidad en venta agregada!',
+        });
+        setTimeout(() => {
+          resetForm();          
+          router.refresh();
+          //router.push('/admin/dashboard');
+        }, 3000);
       }else{
-        throw new Error ('No se creo el auto')
+        setCreateStatus({
+          loading: false,
+          error: true,
+          succesfull: false,
+          message: 'Ha ocurrido un error, vuelve a intentarlo más tarde.',
+        });
+        setTimeout(() => {
+          setCreateStatus(INITIAL_STATE);
+        }, 3000);
+        throw new Error ('No se creo el auto');
       }
 
     }catch(error){
-      
       console.log(error)
     };
   };
@@ -198,10 +248,16 @@ function CarCreate() {
           </div>
         </div>
         
-        <button className={styles.btn} type = "submit" >AGREGAR</button>
+        <button className={styles.btn} type = "submit" disabled={createStatus.loading} >{createStatus.loading ? <CircularProgress size={20}/> : 'AGREGAR'}</button>
     </form>
 
-
+    <Backdrop
+    sx={{ color: '#fff'}}
+    open={Boolean(createStatus.message)}
+    >
+      {createStatus.error && <Alert sx={{width: '50%' , justifyContent: 'center'}} severity="error"><strong>{createStatus.message}</strong></Alert>}
+      {createStatus.succesfull && <Alert sx={{width: '50%' , justifyContent: 'center'}} severity="success"><strong>{createStatus.message}</strong></Alert>}
+    </Backdrop>
       
     </div>
   );

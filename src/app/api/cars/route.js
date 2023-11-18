@@ -2,14 +2,22 @@ import connectMongoDB from '@/libs/mongodb';
 import Car from '@/app/models/car';
 import { NextResponse , NextRequest } from "next/server";
 import { NextApiRequest, NextApiResponse } from 'next';
+import {v2 as cloudinary} from 'cloudinary';
+require('dotenv').config();
 // import multer from 'multer';
+          
+cloudinary.config({ 
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
+    api_key: process.env.CLOUDINARY_API_KEY, 
+    api_secret: process.env.CLOUDINARY_API_SECRET 
+});
 
 export async function POST(request) {
 
-    const {name,year,km, description, price, photoURLs} = await request.json();
+    const {name, year, km, description, price, photoURLs} = await request.json();
 
     await connectMongoDB() ;
-    await Car.create({name, year,km, description, price, photoURLs}) ;
+    await Car.create({name, year, km, description, price, photoURLs}) ;
     console.log("car created")
     return NextResponse.json({message: "Car Creates"}, {status: 201});
 
@@ -33,10 +41,10 @@ export async function GET() {
 export async function DELETE(request) {
     const {id} = await request.json();
     await connectMongoDB() ;
-    await Car.findByIdAndDelete(id);
-
-    return NextResponse.json({message: "Car Deleted", status: 200})
-}  
+    const deleted = await Car.findByIdAndDelete(id);
+    deleted.photoURLs[0].filename && await cloudinary.api.delete_resources(deleted.photoURLs.map((item) => item.filename), { type: 'upload', resource_type: 'image' }).then(console.log);
+    return NextResponse.json({message: "Car Deleted", status: 200});
+};
 
 
 
