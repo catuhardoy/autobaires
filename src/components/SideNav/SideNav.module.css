@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     height: 100%;
-    width: 30%;
+    width: 20%;
 }
 
 .sidenav {
@@ -61,3 +61,21 @@
     background-color: skyblue;
     transition: 0.5s ease;
 }
+
+@media screen and (max-width: 768px) {
+    .container {
+      min-width: 130px;
+    }
+  
+    .link {
+      font-size: 12px;
+    }
+
+    .selected {
+    font-size: 12px;
+    }
+
+    .exit_link {
+    font-size: 12px;
+    }
+  }

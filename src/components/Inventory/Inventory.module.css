@@ -5,13 +5,17 @@
     align-items: center;
     justify-content: flex-start;
     flex-wrap: wrap;
-    width: 100%;
+    width: 75%;
     height: 90vh;
     gap: 15px;
     /* background: linear-gradient(transparent, rgb(36, 36, 36, 1)60%);
     background-color: rgba(70, 70, 70, 0.2);
     backdrop-filter: blur(2px); */
     color: black;
+}
+
+.container h3 {
+    padding: 10px;
 }
 
 .item {
