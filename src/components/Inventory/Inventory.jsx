@@ -1,7 +1,8 @@
 'use client'
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter , usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { deleteCar, fetchCars } from '@/libs/data';
 import { useState, useLayoutEffect , useEffect } from 'react';
 import { Pagination, Stack } from '@mui/material';
@@ -18,6 +19,7 @@ import styles from './Inventory.module.css';
 export default function Inventory({data}) {
 
     const router = useRouter();
+    const path = usePathname();
 
     const [open, setOpen] = useState(false);
     const [deleteID, setDeleteID] = useState('')
@@ -41,7 +43,7 @@ export default function Inventory({data}) {
         setDeleteID('');
     }, [data]);
 
-    console.log(inventory);
+    //console.log(inventory);
 
     const handleChangePage = (event, newPage) => {
         setCurrentPage(newPage);
@@ -57,7 +59,7 @@ export default function Inventory({data}) {
             <h3>Inventario de productos</h3>
 
             {currentItems.map((item) => (
-                <div key={item._id} className={styles.item}>
+                <div onClick={() => router.push(`${path}/${item._id}`)} key={item._id} className={styles.item}>
                     <h4>{item.name}</h4>
                     <p>Km: {item.km}</p>
                     <p>Año: {item.year}</p>
