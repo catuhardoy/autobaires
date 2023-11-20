@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { deleteCar, fetchCars, updateCar } from '@/libs/data';
 import { useState, useLayoutEffect , useEffect } from 'react';
 import { Pagination, Stack } from '@mui/material';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -174,6 +176,13 @@ export default function Detail ({data}) {
                     <LoadingButton sx={{margin: '10px'}} size="small" onClick={handleUpdate} loading={updateStatus.loading} variant='contained' disabled={updateStatus.loading}>Guardar</LoadingButton>
                 </DialogActions>
             </Dialog>
+
+            {updateStatus.succesfull && <Snackbar open={Boolean(updateStatus.message)} autoHideDuration={5000} onClose={() => setUploadStatus(INITIAL_STATE)}>
+                <Alert /* onClose={handleClose} */ severity='success' sx={{ width: '100%' }} variant='filled'>{updateStatus.message}</Alert>
+            </Snackbar>}
+            {updateStatus.error && <Snackbar open={Boolean(updateStatus.message)} autoHideDuration={5000} onClose={() => setUploadStatus(INITIAL_STATE)}>
+                <Alert /* onClose={handleClose} */ severity='error' sx={{ width: '100%' }} variant='filled'>{updateStatus.message}</Alert>
+            </Snackbar>}
     
         </div>
     );
