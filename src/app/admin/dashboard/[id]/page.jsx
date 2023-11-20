@@ -12,7 +12,7 @@ export default async function Page ({params}) {
     const data = await fetchCarById(id);
 
     return (
-        <Suspense fallback={<div>Cargando...</div>}>
+        <Suspense fallback={<div className={styles.loading}>Cargando...</div>}>
             <Detail data = {data.car}/> 
         </Suspense>
     

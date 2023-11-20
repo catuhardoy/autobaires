@@ -4,7 +4,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { usePathname } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import styles from './SideNav.module.css';
 
@@ -18,6 +18,7 @@ const links = [
 export default function NavLinks() {
 
     const path = usePathname();
+    const {id} = useParams();
     //console.log(path);
 
     return (
@@ -28,7 +29,7 @@ export default function NavLinks() {
                     <Link
                     key={link.name}
                     href={link.href}
-                    className={path === link.href ? styles.selected : styles.link}
+                    className={path === link.href || path.includes(`${link.href}/${id}`) ? styles.selected : styles.link}
                     >
                         <LinkIcon fontSize='small' />
                         <p>{link.name}</p>

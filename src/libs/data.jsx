@@ -56,6 +56,25 @@ export async function deleteCar(id) {
 
 };
 
+export async function updateCar(id, data) {
+    try {
+
+        const res = await fetch('http://localhost:3000/api/cars', {
+            method: 'PUT',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({id, data}),
+        });
+        return await res.json();
+    } 
+    catch (error) {
+        console.log(error);
+        throw new Error('Failed to update data');
+    };
+
+};
+
 export async function uploadImage(file) {
     
     try {
