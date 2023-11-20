@@ -38,12 +38,21 @@ export async function GET() {
     return NextResponse.json({message: "Car Deleted"}, {status: 200})
 } */
 
-export async function DELETE(request) {
+export async function DELETE (request) {
     const {id} = await request.json();
-    await connectMongoDB() ;
+    await connectMongoDB();
     const deleted = await Car.findByIdAndDelete(id);
     deleted.photoURLs[0].filename && await cloudinary.api.delete_resources(deleted.photoURLs.map((item) => item.filename), { type: 'upload', resource_type: 'image' }).then(console.log);
     return NextResponse.json({message: "Car Deleted", status: 200});
+};
+
+export async function PUT (request) {
+    const {id , data } = await request.json();
+
+    await connectMongoDB();
+    const updated = await Car.findByIdAndUpdate(id, data, {returnDocument: "after"});
+    if(!updated) throw new Error("Not Found", 404);
+    return NextResponse.json({message: "Car Updated", status: 201, data: updated});
 };
 
 

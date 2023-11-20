@@ -6,10 +6,14 @@
     justify-content: flex-start;
     flex-wrap: wrap;
     width: 75%;
-    height: 90vh;
+    min-height: 80vh;
     gap: 15px;
     color: black;
  
+}
+
+.container h2 {
+    padding: 10px;
 }
   
 .images_section {
@@ -44,4 +48,21 @@
     flex-wrap: wrap;
     gap: 20px;
     width: 100%;
+}
+
+.info_section label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    min-height: 50px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.info_section button {
+    align-self: flex-start;
 }

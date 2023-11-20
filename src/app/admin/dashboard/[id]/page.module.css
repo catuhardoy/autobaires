@@ -1,4 +1,4 @@
-.container {
+.loading {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -6,7 +6,7 @@
     justify-content: flex-start;
     flex-wrap: wrap;
     width: 75%;
-    height: 90vh;
+    height: 80vh;
     gap: 15px;
     color: black;
 }
