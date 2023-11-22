@@ -8,7 +8,10 @@ import PopUp from '../PopUp/PopUp'
 const ImageSlider = () => {
 
 const [currentSlide, setCurrentSlide] = useState(0);
-const images = ['/auto1.jpg', '/auto2.jpg', '/auto3.jpg'];
+const images = [
+                'https://res.cloudinary.com/autobaires-cloud/image/upload/v1700670225/imagenes/aronfxi0mksldgtsyjqo.jpg',
+                'https://res.cloudinary.com/autobaires-cloud/image/upload/v1700670226/imagenes/vpnopmksnnhbbzfao11u.jpg',
+                'https://res.cloudinary.com/autobaires-cloud/image/upload/v1700670228/imagenes/ckipxfm6vphbyw2pti83.jpg'];
 const totalSlides = images.length;
 
 
