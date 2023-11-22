@@ -11,6 +11,7 @@ import ErrorIcon from '@mui/icons-material/Error';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import styles from './page.module.css'
 
@@ -46,8 +47,6 @@ function CarCreate() {
     setKm('');
     setDescription('');
     setPrice('');
-    setUploadStatus(INITIAL_STATE);
-    setCreateStatus(INITIAL_STATE);
   };
 
   const handleImagesChange = (e) => {
@@ -113,10 +112,6 @@ function CarCreate() {
         succesfull: false,
         message: 'Debe completar todos los campos.',
       });
-      setTimeout(() => {
-        setCreateStatus(INITIAL_STATE);
-      }, 3000);
-      //alert ('Todos los campos son requeridos');
       return;
     };
 
@@ -143,11 +138,9 @@ function CarCreate() {
           succesfull: true,
           message: 'Nueva unidad en venta agregada!',
         });
-        setTimeout(() => {
-          resetForm();          
-          router.refresh();
+        resetForm();
+        return router.refresh();
           //router.push('/admin/dashboard');
-        }, 3000);
       }else{
         setCreateStatus({
           loading: false,
@@ -155,9 +148,7 @@ function CarCreate() {
           succesfull: false,
           message: 'Ha ocurrido un error, vuelve a intentarlo más tarde.',
         });
-        setTimeout(() => {
-          setCreateStatus(INITIAL_STATE);
-        }, 3000);
+        
         throw new Error ('No se creo el auto');
       }
 
@@ -248,16 +239,25 @@ function CarCreate() {
           </div>
         </div>
         
-        <button className={styles.btn} type = "submit" disabled={createStatus.loading} >{createStatus.loading ? <CircularProgress size={20}/> : 'AGREGAR'}</button>
+        <button className={styles.btn} type = "submit" disabled={createStatus.loading || createStatus.succesfull} >
+          {createStatus.loading ? <CircularProgress size={20}/> : 'AGREGAR'}
+        </button>
     </form>
 
-    <Backdrop
+    {/* <Backdrop
     sx={{ color: '#fff'}}
     open={Boolean(createStatus.message)}
     >
       {createStatus.error && <Alert sx={{width: '50%' , justifyContent: 'center'}} severity="error"><strong>{createStatus.message}</strong></Alert>}
       {createStatus.succesfull && <Alert sx={{width: '50%' , justifyContent: 'center'}} severity="success"><strong>{createStatus.message}</strong></Alert>}
-    </Backdrop>
+    </Backdrop> */}
+
+    <Snackbar open={createStatus.succesfull} autoHideDuration={3000} onClose={() => setCreateStatus(INITIAL_STATE)}>
+      <Alert severity='success' sx={{ width: '100%' }} variant='filled'>{createStatus.message}</Alert>
+    </Snackbar>
+    <Snackbar open={createStatus.error} autoHideDuration={3000} onClose={() => setCreateStatus(INITIAL_STATE)}>
+      <Alert severity='error' sx={{ width: '100%' }} variant='filled'>{createStatus.message}</Alert>
+    </Snackbar>
       
     </div>
   );

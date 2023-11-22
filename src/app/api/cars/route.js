@@ -42,7 +42,7 @@ export async function DELETE (request) {
     const {id} = await request.json();
     await connectMongoDB();
     const deleted = await Car.findByIdAndDelete(id);
-    deleted.photoURLs[0].filename && await cloudinary.api.delete_resources(deleted.photoURLs.map((item) => item.filename), { type: 'upload', resource_type: 'image' }).then(console.log);
+    deleted.photoURLs[0]?.filename && await cloudinary.api.delete_resources(deleted.photoURLs.map((item) => item.filename), { type: 'upload', resource_type: 'image' }).then(console.log);
     return NextResponse.json({message: "Car Deleted", status: 200});
 };
 
