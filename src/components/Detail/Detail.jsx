@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { deleteCar, fetchCars, updateCar } from '@/libs/data';
 import { useState, useLayoutEffect , useEffect } from 'react';
 import { Pagination, Stack } from '@mui/material';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -21,7 +23,7 @@ import styles from './Detail.module.css';
 
 export default function Detail ({data}) {
 
-    console.log(data);
+    //console.log(data);
 
     const router = useRouter();
 
@@ -39,27 +41,38 @@ export default function Detail ({data}) {
     const total = images?.length; */
     
     const [open, setOpen] = useState(false);
-    const [edit, setEdit] = useState({
+    const [update, setUpdate] = useState({
         input:'',
-        value: {}
+        value: null
     });
     const [updateStatus, setUploadStatus] = useState(INITIAL_STATE);
 
     const handleClick = (input, value) => {
-        setEdit({
+        setUpdate({
             input,
             value
         });
         setOpen(true);
     };
 
+    //console.log(update);
+
     const handleUpdate = async () => {
+
+        //console.log(Object.values(update.value)[0]);
+        if(!Object.values(update.value)[0]) return setUploadStatus({
+            ...updateStatus,
+            loading: false,
+            error: true,
+            message: 'Debe ingresar una nueva información antes de guardar.'
+        });
+
         setUploadStatus({
             ...updateStatus,
             loading: true,
         });
 
-        const res = await updateCar(data._id, edit.value);
+        const res = await updateCar(data._id, update.value);
         
         if(res.data) {
             setUploadStatus({
@@ -133,21 +146,21 @@ export default function Detail ({data}) {
 
                 <label>
                     <p>Km: {data.km}</p>
-                    <IconButton aria-label='edit' size="small" onClick={() => handleClick('Kilometraje', {km:''})}>
+                    <IconButton aria-label='edit' size="small" onClick={() => handleClick('Kilometraje', {km: ''})}>
                         <EditIcon fontSize='small' />
                     </IconButton>
                 </label>
 
                 <label>
                     <p style={{fontSize: '16px' }}>{data.description}</p>
-                    <IconButton aria-label='edit' size="small" onClick={() => handleClick('Descripción', {description:''})}>
+                    <IconButton aria-label='edit' size="small" onClick={() => handleClick('Descripción', {description: ''})}>
                         <EditIcon fontSize='small' />
                     </IconButton>
                 </label>
                 
                 <label>
                     <p><strong>Precio: $ {data.price}</strong></p>
-                    <IconButton aria-label='edit' size="small" onClick={() => handleClick('Precio', {price:''})}>
+                    <IconButton aria-label='edit' size="small" onClick={() => handleClick('Precio', {price: ''})}>
                         <EditIcon fontSize='small' />
                     </IconButton>
                 </label>
@@ -160,13 +173,16 @@ export default function Detail ({data}) {
                         autoFocus
                         margin="normal"
                         id='value'
-                        label={edit.input}
+                        label={update.input}
                         type="text"
                         fullWidth
                         variant="outlined"
-                        onChange={(e) => setEdit({...edit, value: {
-                            [Object.keys(edit.value)[0]]: e.target.value
-                        }})}
+                        onChange={(e) => {
+                            setUpdate({
+                                ...update, 
+                                value: { [Object.keys(update.value)[0]]: e.target.value }
+                            }
+                        )}}
                     />
                 </DialogContent>
                 <DialogActions sx={{padding: '20px'}}>
@@ -174,6 +190,13 @@ export default function Detail ({data}) {
                     <LoadingButton sx={{margin: '10px'}} size="small" onClick={handleUpdate} loading={updateStatus.loading} variant='contained' disabled={updateStatus.loading}>Guardar</LoadingButton>
                 </DialogActions>
             </Dialog>
+
+            <Snackbar open={updateStatus.succesfull} autoHideDuration={5000} onClose={() => setUploadStatus(INITIAL_STATE)}>
+                <Alert severity='success' sx={{ width: '100%' }} variant='filled'>{updateStatus.message}</Alert>
+            </Snackbar>
+           <Snackbar open={updateStatus.error} autoHideDuration={5000} onClose={() => setUploadStatus(INITIAL_STATE)}>
+                <Alert severity='error' sx={{ width: '100%' }} variant='filled'>{updateStatus.message}</Alert>
+            </Snackbar>
     
         </div>
     );
