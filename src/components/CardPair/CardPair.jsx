@@ -6,18 +6,12 @@ const CardPair = () => {
   return (
     <div className={styles.container}>
       <div className={styles.cardPair}>
+
       <div className={styles.card}>
-        
-        <div className={styles.image}>
-        </div>  
         <Link href="/form-compra"> <h2 className={styles.title}>COMPRAR TU AUTO</h2> </Link> 
       </div>
       <div className={styles.card}>
-        
         <Link href="/form-venta"> <h2 className={styles.title}>VENDER TU AUTO</h2 ></Link>
-       
-        
-        
       </div>
     </div>
     </div>
@@ -27,6 +21,7 @@ const CardPair = () => {
 export default CardPair
 
 //poner logo autobaires somwhere 
+//consultarle a ema css.
 
 
 

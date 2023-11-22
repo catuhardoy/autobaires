@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    height: 100vh;  
+    height: 80vh;  
     width: 100vw;
   }
 
@@ -29,10 +29,27 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin: 10px auto; 
     text-align: center;
-    background-image: url('/card.jpg');
+    background-image: url('https://res.cloudinary.com/autobaires-cloud/image/upload/v1700670226/imagenes/lw2mkewdgplljmmzjjkm.jpg');
     background-size: cover;
     background-position: center;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 81%);
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out, width 0.2s ease-in-out;
+    background-color: rgba(255, 255, 255, 0.7);
+    opacity: 0.8
+  }
+
+  .cardTwo{
+    position: relative;
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 48%;
+    height: 500px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px auto; 
+    text-align: center;
+    background-image: url('https://res.cloudinary.com/autobaires-cloud/image/upload/v1700670226/imagenes/lw2mkewdgplljmmzjjkm.jpg');
+    background-size: cover;
+    background-position: center;
     cursor: pointer;
     transition: opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out, width 0.2s ease-in-out;
     background-color: rgba(255, 255, 255, 0.7);
