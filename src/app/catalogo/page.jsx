@@ -17,6 +17,7 @@ import NewRevenues from '@/components/NewRevenues/NewRevenues';
 import { Pagination, Stack } from '@mui/material';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import Loading from '@/components/loading/Loading';
 
 
 const carBrands = [
@@ -206,7 +207,7 @@ const handleChangePage = (event, newPage) => {
     </Box>
     </div>
 
-        <div className={styles.cardsContainer}>
+        {cars.length !== 0 && <div className={styles.cardsContainer}>
             <div className={styles.carCards}>
                 {currentItems.map((car)=> {
 
@@ -215,32 +216,36 @@ const handleChangePage = (event, newPage) => {
                   return(
                     <div key={car._id} className={styles.card}>
                    
-                    <Link href = {`/catalogo/${car._id}`}>
+                    <Link href = {`/catalogo/${car._id}`} className={styles.item_link}>
                     {/* <img src={car.photo} alt={car.name} className={styles.img} />   */}
-                     <img src={car.photoURLs.length ? car.photoURLs[0].url : 'https://images.pexels.com/photos/707046/pexels-photo-707046.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'} alt={car.name} className={styles.img} />  
-                    <h3 className={styles.brand}>{car.name}</h3>
-                    <p className={styles.description}> {car.description}</p>
-                    <p className={styles.km}>Km: {car.km}</p>
-                    <p className={styles.year}>Año: {car.year}</p>
-                    <p className={styles.price}>$ {car.price}</p>
+                    <img src={car.photoURLs.length ? car.photoURLs[0].url : 'https://images.pexels.com/photos/707046/pexels-photo-707046.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'} alt={car.name} className={styles.img} />  
+                    <h3>{car.name}</h3>
+                    <p>{`Año: ${car.year} - Km: ${car.km}`}</p>
+                    <p>{car.description}</p>
+                    {/* <p className={styles.km}>{}</p> */}
                     </Link>
-                    <button className={styles.button}>Consultar</button>
+                    <div>
+                      <button className={styles.button}>Consultar</button>
+                      <p><strong>$ {car.price}</strong></p>
+                    </div>
                     
                   </div>
                   )
               
-        })}
+                })}
             </div>
+            <Stack spacing={2}>
+                  <Pagination
+            count={Math.ceil(filteredCars.length / itemsPerPage)}
+            page={currentPage}
+            onChange={handleChangePage}
+            variant="outlined" shape="rounded"
+          />
+          </Stack>
+          </div>}
+
+          {!cars.length && <Loading />}
         </div>
-        </div>
-        <Stack spacing={2}>
-        <Pagination
-  count={Math.ceil(filteredCars.length / itemsPerPage)}
-  page={currentPage}
-  onChange={handleChangePage}
-  variant="outlined" shape="rounded"
-/>
-</Stack>
     </div>
   )
 }

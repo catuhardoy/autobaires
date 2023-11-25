@@ -120,3 +120,23 @@ export async function uploadImages(files) {
     };
 
 };
+
+export async function deleteImage(filename) {
+    
+    try {
+        const res = await fetch('http://localhost:3000/api/cloudinary/delete', {
+            method: 'DELETE',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({filename}),
+        });
+        console.log(res);
+        return await res.json();
+    } 
+    catch (error) {
+        console.log(error);
+        throw new Error('Failed to delete image');
+    };
+
+};

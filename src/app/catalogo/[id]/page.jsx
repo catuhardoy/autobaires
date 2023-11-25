@@ -8,6 +8,8 @@ import { Divider } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState, useLayoutEffect } from 'react';
 import { useParams } from 'next/navigation';
+import Loading from '@/components/loading/Loading';
+
 
 const CarDescription = () => {
   const useparams = useParams()
@@ -45,55 +47,53 @@ const CarDescription = () => {
     <div className={styles.container}>
        
       
+      {car &&
       <div className={styles.left}>
-        {car ? (
-           <div className={styles.item} key={car._id}>
-           <div className={styles.imgContainer}>
-           <img src={car.photoURLs[currentImageIndex].url} alt={car.name} className={styles.img} />
-           </div>
+          <div className={styles.item} key={car._id}>
+            <div className={styles.imgContainer}>
+              <img src={car.photoURLs[currentImageIndex].url} alt={car.name} className={styles.img} />
+            </div>
    
-         <div className={styles.thumbnailContainer}>
-           {car.photoURLs.map((photo, index) => (
-             <img
-               key={index}
-               src={photo.url}
-               alt={`Thumbnail ${index + 1}`}
-               className={styles.thumbnail}
-               onClick={() => setCurrentImageIndex(index)}
-             />
-           ))}
-         </div>
-       </div>
-          ):(
-          <div>no se encontraron datos de este auto</div>
-        )}
-      </div>
+            <div className={styles.thumbnailContainer}>
+              {car.photoURLs.map((photo, index) => (
+                <img
+                  key={index}
+                  src={photo.url}
+                  alt={`Thumbnail ${index + 1}`}
+                  className={styles.thumbnail}
+                  onClick={() => setCurrentImageIndex(index)}
+                />
+              ))}
+            </div>
+          </div>
+      </div>}
+      {car && 
       <div className={styles.right}>
-        {car ? (
           <div className={styles.content}>
-            <Image src = '/LOGO_AUTOBAIRES_03.png' alt='autobaires' width={120} height={120} className={styles.logo}/>
-            <h1 className={styles.name}>{car.name}</h1>
-            <p className={styles.name}><strong>Año:</strong> {car.year}</p>
-            <p className={styles.name}><strong>Kilometros:</strong> {car.km}</p>
+            <div className={styles.title}>
+              <h1 className={styles.name}>{car.name}</h1>
+              <Image src = '/LOGO_AUTOBAIRES_03.png' alt='autobaires' width={100} height={60} style={{objectFit: 'cover'}} />
+            </div>
+            <p className={styles.data}><strong>Año:</strong> {car.year}</p>
+            <p className={styles.data}><strong>Kilometros:</strong> {car.km}</p>
 
-            <p className={styles.desc}>{car.description}</p>
-            <br />
-            <Divider/>
-            <p className={styles.price}>{car.price}</p>
+            <p className={styles.desc}>{car.description}</p>  
+            <p className={styles.price}>{`$ ${car.price}`}</p>
             
-              <Link href='http://wa.me/qr/A2RTH4IJVTBQA1' target="_blank" rel="noopener noreferrer">
-                <button className={styles.button}>CONSULTAR</button>
-              </Link>
-              <br />
+            <div className={styles.options_btn}>
               <Link href='/catalogo'>
                 <button className={styles.buttonBack}>VOLVER</button>
               </Link>
+              <Link href='http://wa.me/qr/A2RTH4IJVTBQA1' target="_blank" rel="noopener noreferrer">
+                <button className={styles.button}>CONSULTAR</button>
+              </Link>
+            </div>
               
           </div>
-        ) : (
-          <div>No se encontraron datos</div>
-        )}
-      </div>
+
+      </div>}
+
+      {!car && <Loading/>}
     
     </div>
     

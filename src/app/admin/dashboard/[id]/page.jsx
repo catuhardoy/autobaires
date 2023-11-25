@@ -4,7 +4,7 @@ import Detail from '@/components/Detail/Detail';
 import { fetchCarById } from '@/libs/data';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import styles from './page.module.css'
+import Loading from '@/components/loading/Loading';
 
 export default async function Page ({params}) {
 
@@ -12,9 +12,7 @@ export default async function Page ({params}) {
     const data = await fetchCarById(id);
 
     return (
-        <Suspense fallback={<div className={styles.loading}>Cargando...</div>}>
-            <Detail data = {data.car}/> 
-        </Suspense>
+        <Detail data = {data.car}/> 
     
     );
 };
