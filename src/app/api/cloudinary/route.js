@@ -52,3 +52,16 @@ export async function POST(request) {
         url: response.secure_url,
     });
 };
+
+export async function DELETE(request) {
+    const {filename} = await request.json();
+    //console.log(filename);
+    
+    const response = await cloudinary.api.delete_resources(filename, { type: 'upload', resource_type: 'image' });
+    console.log(response);
+
+    return NextResponse.json({
+        message: 'Succesfully deleted',
+        succesfull: true,
+    });
+};

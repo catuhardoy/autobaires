@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import {useState} from 'react';
+import {useState, useRef} from 'react';
 import {useRouter} from 'next/navigation';
 import { uploadImage, uploadImages } from '@/libs/data';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -36,6 +36,7 @@ function CarCreate() {
   const [price, setPrice] = useState('');
   const [images, setImages] = useState([]);
   const [photoURLs, setPhotoURLs] = useState([]);
+  const fileRef = useRef(null);
    
 
   const router = useRouter();
@@ -48,6 +49,7 @@ function CarCreate() {
     setDescription('');
     setPrice('');
     setPhotoURLs([]);
+    fileRef.current.value = null;
     setUploadStatus(INITIAL_STATE);
   };
 
@@ -61,7 +63,20 @@ function CarCreate() {
   const handleUploadImage = async (e) => {
     e.preventDefault();
 
-    if(!images.length || !images) return alert ('Debes seleccionar una imagen');
+    if(!images.length || !images) {
+      setUploadStatus({
+        ...uploadStatus,
+        error: true,
+        message: 'Debe seleccionar una imagen.',
+      });
+      setCreateStatus({
+        ...createStatus,
+        error: true,
+        message: 'Debe seleccionar una imagen.',
+      });
+      return;
+    };
+
     setUploadStatus({
       loading: true,
       error: false,
@@ -221,6 +236,7 @@ function CarCreate() {
         <div className={styles.upload_section}>
           <label htmlFor='photo' className={styles.image_input}>
             <input
+            ref={fileRef}
             className={styles.input}
             type="file"
             accept=".jpg, .jpeg, .png"
