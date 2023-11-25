@@ -43,11 +43,6 @@ export async function deleteCar(id) {
             body: JSON.stringify({id}),
         });
         //console.log(res.json());
-        /* return (
-            <Stack sx={{ width: '100%' }} spacing={2}>
-                <Alert severity="info">Se ha borrado el producto con exito.</Alert>
-            </Stack>
-          ); */
     } 
     catch (error) {
         console.log(error);
@@ -81,7 +76,7 @@ export async function uploadImage(file) {
         const formData = new FormData();
         formData.append('images', file);
 
-        const res = await fetch('http://localhost:3000/api/upload', {
+        const res = await fetch('http://localhost:3000/api/cloudinary', {
             method: 'POST',
             body: formData,
         });
@@ -103,7 +98,7 @@ export async function uploadImages(files) {
             const formData = new FormData();
             formData.append('images', file);
     
-            const res = await fetch('http://localhost:3000/api/upload', {
+            const res = await fetch('http://localhost:3000/api/cloudinary', {
                 method: 'POST',
                 body: formData,
             });
@@ -124,7 +119,7 @@ export async function uploadImages(files) {
 export async function deleteImage(filename) {
     
     try {
-        const res = await fetch('http://localhost:3000/api/cloudinary/delete', {
+        const res = await fetch('http://localhost:3000/api/cloudinary', {
             method: 'DELETE',
             headers:{
                 'Content-Type': 'application/json'
