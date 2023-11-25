@@ -47,6 +47,8 @@ function CarCreate() {
     setKm('');
     setDescription('');
     setPrice('');
+    setPhotoURLs([]);
+    setUploadStatus(INITIAL_STATE);
   };
 
   const handleImagesChange = (e) => {

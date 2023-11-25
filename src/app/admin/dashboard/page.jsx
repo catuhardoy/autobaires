@@ -11,9 +11,6 @@ export default async function Dashboard() {
   const data = await fetchCars();
 
   return (
-    <Suspense fallback={<div>Cargando...</div>}>
-      <Inventory data={ data.cars }/>
-    </Suspense>
-    
+    <Inventory data={ data.cars }/>
   );
 };
