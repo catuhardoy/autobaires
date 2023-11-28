@@ -20,6 +20,9 @@ import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import CancelIcon from '@mui/icons-material/Cancel';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import DeleteIcon from '@mui/icons-material/Delete';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import styles from './Detail.module.css';
 
 export default function Detail ({data}) {
@@ -169,8 +172,28 @@ export default function Detail ({data}) {
 
     return (
         <div className={styles.container}>
-
             <h2>Detalles de la unidad</h2>
+            
+            <div className={styles.options_btn}>
+                <button className={styles.back_btn} onClick={() => {
+                    router.refresh();
+                    router.back();
+                }}>
+                    VOLVER
+                </button>
+                <div style={{display: 'flex' , justifyContent: 'flex-end', gap: '30px'}}>
+                    <label>
+                        <IconButton aria-label='delete' size='large' onClick={() => console.log('Destacando unidad...')}>
+                            {data.favorite ? <FavoriteIcon fontSize='medium' sx={{color: 'red'}}/> : <FavoriteBorderIcon fontSize='medium'/>}
+                        </IconButton>
+                    </label>
+                    <label>
+                        <IconButton aria-label='delete' size='large' onClick={() => console.log('Borrando unidad...')}>
+                            <DeleteIcon fontSize='medium' />
+                        </IconButton>
+                    </label>
+                </div>
+            </div>
 
             <div className={styles.images_section}>
            
@@ -254,6 +277,8 @@ export default function Detail ({data}) {
                     </IconButton>
                 </label>
             </div>
+            
+
 
             <Dialog open={open} onClose={() => setOpen(false)} disableScrollLock={true} fullWidth >
                 <DialogTitle>Ingrese la nueva información de la unidad</DialogTitle>
