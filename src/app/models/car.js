@@ -9,8 +9,12 @@ const imageSchema = new Schema(
 );
 
 const carSchema = new Schema(
+
     {
-    name:{
+    brand:{
+        type: String
+    },
+    model:{
         type: String
     },
     year:{
@@ -26,7 +30,11 @@ const carSchema = new Schema(
     price:{
         type: String
     },
-
+    favorite: {
+        type: Boolean,
+        default: false, // Valor predeterminado es false
+      },
+      
     photoURLs: [imageSchema]  // Array de Objets
 }, 
 

@@ -29,7 +29,7 @@
     padding: 5px;
     text-align: left;
     border-radius: 20px;
-    background-color: rgb(217, 213, 198, 0.5);
+    background-color: rgba(165, 165, 164, 0.5);
     transition: 0.3s ease-out;
 }
 .item_link {
