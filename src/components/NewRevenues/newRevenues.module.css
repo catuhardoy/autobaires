@@ -1,18 +1,19 @@
 .container {
     display: flex;
-    flex-wrap: wrap; 
+    flex-direction: column;
     align-items: center;
-    /* Permite que las tarjetas se envuelvan en una nueva fila si no caben en el ancho de la pantalla */
-    justify-content: center; /* Centra las tarjetas horizontalmente */
-    gap: 20px; /* Espaciado entre las tarjetas */
-    padding: 20px; /* Espaciado interno para el contenedor */
-    
+    justify-content: center;
+    gap: 20px; 
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
   }
   .cards{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
   }
   
   /* Estilos para el título */
@@ -21,3 +22,10 @@
     font-weight: bold;
     margin-bottom: 20px;
   }
+
+@media (max-width: 900px) {
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}

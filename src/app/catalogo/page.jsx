@@ -116,6 +116,7 @@ const Catalogo = () => {
 
     fetchCars();
 }, []);
+console.log(cars);
 
 const getBrandFromName = (name) => {
   return name.split(' ')[0];
@@ -210,9 +211,6 @@ const handleChangePage = (event, newPage) => {
         {cars.length !== 0 && <div className={styles.cardsContainer}>
             <div className={styles.carCards}>
                 {currentItems.map((car)=> {
-
-                  console.log(car)
-                  
                   return(
                     <div key={car._id} className={styles.card}>
                    
