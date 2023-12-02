@@ -1,3 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px; 
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  gap: 5%;
+}
 
 .card {
   width: 30%;
@@ -8,46 +26,49 @@
   height: 400px;
 }
 
-  .img {
-    object-fit: cover;
-    width: 100%;
-    height: 200px;
-  }
-  
-  .name{
-    margin: 10px 0;
-    font-size: 1.2rem;
-  }
-  
-  .year {
-    margin: 5px 0;
-    font-size: 0.8rem;
-  }
-  
-  .price {
-    margin: 10px 0;
-    font-size: 1rem;
-  }
-   .desc {
-    margin: 5px 0;
-    font-size: 0.8rem;
-  }
-  
-  .button {
-    font-family: 'Montserrat', sans-serif;
-    background-color:black;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    margin-top: 10px;
-    
-  }
+.img {
+  object-fit: cover;
+  width: 100%;
+  height: 200px;
+}
 
-  @media (max-width: 900px) {
-    .card {
-      width: 90%;
-    }
-  }
+.name{
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+.year {
+  margin: 5px 0;
+  font-size: 0.8rem;
+}
+
+.price {
+  margin: 10px 0;
+  font-size: 1rem;
+}
+  .desc {
+  margin: 5px 0;
+  font-size: 0.8rem;
+}
+
+.button {
+  font-family: 'Montserrat', sans-serif;
+  background-color:black;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 10px;
   
+}
+
+@media (max-width: 900px) {
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  .card {
+    width: 90%;
+  }
+}

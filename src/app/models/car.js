@@ -11,39 +11,35 @@ const imageSchema = new Schema(
 const carSchema = new Schema(
 
     {
-    // brand:{
-    //     type: String
-    // },
-    // model:{
-    //     type: String
-    // },
-    name:{
-        type: String
-    },
-    year:{
-        type: String
-    },
+        brand:{
+            type: String
+        },
+        model:{
+            type: String
+        },
+        year:{
+            type: String
+        },
+        km:{
+            type: String
+        },
+        description:{
+            type: String
+        },
+        price:{
+            type: String
+        },
+        favorite: {
+            type: Boolean,
+            default: false, // Valor predeterminado es false
+        },
 
-   km:{
-        type: String
-    },
-    description:{
-        type: String
-    },
-    price:{
-        type: String
-    },
-    // favorite: {
-    //     type: Boolean,
-    //     default: false, // Valor predeterminado es false
-    //   },
-
-    photoURLs: [imageSchema]  // Array de Objets
-}, 
+        photoURLs: [imageSchema]  // Array de Objets
+    }, 
 
     {timestamps: true}
 );
 
 const Car = mongoose.models.Car || mongoose.model('Car', carSchema);
 
-export default Car
+export default Car;

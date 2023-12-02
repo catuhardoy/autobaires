@@ -26,10 +26,10 @@ const ContactForm = ({handleClose}) => {
 
   return (
     <div className={styles.container}>
-     <Image src='/LOGO_AUTOBAIRES_03.png' alt= "autobaires" width={170} height={170} className={styles.logo}/>
+     <Image src='/LOGO_AUTOBAIRES_03.png' alt= "autobaires" width={150} height={100} className={styles.logo}/>
     <h1 className={styles.title}>CONTACTANOS</h1>
     
-    <h2 className={styles.subTitle}>Completá el formulario</h2>
+    <h2 className={styles.subTitle}>Completá el formulario y nos pondremos en contacto</h2>
     <div className={styles.content}>
     
      <form className={styles.form}  ref={form} onSubmit={sendEmail} >

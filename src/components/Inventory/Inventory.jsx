@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRouter , usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { deleteCar, fetchCars } from '@/libs/data';
+import { deleteCar, fetchCars, updateCar } from '@/libs/data';
 import { useState, useLayoutEffect , useEffect } from 'react';
 import { Pagination, Stack } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -15,6 +15,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import styles from './Inventory.module.css';
@@ -31,6 +33,7 @@ export default function Inventory({data}) {
     };
 
     const [deleteStatus, setDeleteStatus] = useState(INITIAL_STATE);
+    const [updateStatus, setUpdateStatus] = useState(INITIAL_STATE);
     const [open, setOpen] = useState(false);
     const [deleteID, setDeleteID] = useState('')
   
@@ -58,6 +61,34 @@ export default function Inventory({data}) {
 
     const handleChangePage = (event, newPage) => {
         setCurrentPage(newPage);
+    };
+
+    const handleSetFavorite = async (item) => {
+        setUpdateStatus({
+            ...updateStatus,
+            loading: true,
+        });
+        
+        const res = item.favorite ? await updateCar(item._id, {favorite: false}) : await updateCar(item._id, {favorite: true});
+        
+        if(res.data) {
+            setUpdateStatus({
+                ...updateStatus,
+                loading: false,
+                succesfull: true,
+                message: 'Información actualizada con exito!'
+            });
+            return router.refresh();
+        }
+        else {
+            setUpdateStatus({
+                ...updateStatus,
+                loading: false,
+                error: true,
+                message: 'Ha ocurrido un error, vuelve a intentarlo más tarde.'
+            });
+            return;
+        };
     };
 
     const handleDelete = async (e) => {
@@ -93,11 +124,14 @@ export default function Inventory({data}) {
                     {/* <div onClick={() => router.push(`${path}/${item._id}`)}></div> */}
                     <Link className={styles.item_link} href={`${path}/${item._id}`}>
                     
-                        <h4>{item.name}</h4>
+                        <h4>{`${item.brand} ${item.model}`}</h4>
                         <p>Km: {item.km}</p>
                         <p>Año: {item.year}</p>
                         <p>$ {item.price}</p>
                     </Link>
+                    <IconButton aria-label='favorite' onClick={() => handleSetFavorite(item)}>
+                            {item.favorite ? <FavoriteIcon sx={{color: 'red'}}/> : <FavoriteBorderIcon />}
+                    </IconButton>
                     <IconButton onClick={() => handleClickOpen(item._id)}>
                         <DeleteIcon/>
                     </IconButton>
@@ -136,11 +170,17 @@ export default function Inventory({data}) {
                 </DialogContent>
             </Dialog>
 
-            <Snackbar open={deleteStatus.succesfull} autoHideDuration={3000} onClose={() => setDeleteStatus(INITIAL_STATE)}>
-                <Alert severity='success' sx={{ width: '100%' }} variant='filled'>{deleteStatus.message}</Alert>
+            <Snackbar open={deleteStatus.succesfull || updateStatus.succesfull} autoHideDuration={3000} onClose={() => {
+                setDeleteStatus(INITIAL_STATE);
+                setUpdateStatus(INITIAL_STATE);
+            }}>
+                <Alert severity='success' sx={{ width: '100%' }} variant='filled'>{deleteStatus.message || updateStatus.message}</Alert>
             </Snackbar>
-           <Snackbar open={deleteStatus.error} autoHideDuration={3000} onClose={() => setDeleteStatus(INITIAL_STATE)}>
-                <Alert severity='error' sx={{ width: '100%' }} variant='filled'>{deleteStatus.message}</Alert>
+           <Snackbar open={deleteStatus.error || updateStatus.error} autoHideDuration={3000} onClose={() => {
+                setDeleteStatus(INITIAL_STATE);
+                setUpdateStatus(INITIAL_STATE);
+            }}>
+                <Alert severity='error' sx={{ width: '100%' }} variant='filled'>{deleteStatus.message || updateStatus.message}</Alert>
             </Snackbar>
 
 

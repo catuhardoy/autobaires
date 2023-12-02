@@ -39,8 +39,8 @@ export default function Detail ({data}) {
     };
 
     const images = data.photoURLs;
-    const defaultModel = data.name.split(' ');
-    console.log(images);
+    //const defaultModel = data.name.split(' ');
+    console.log(data);
 
     /* const [currentImage, setCurrentImage] = useState(0);
     const total = images?.length; */
@@ -52,6 +52,62 @@ export default function Detail ({data}) {
     });
     const [defaultImage, setDefaultImage] = useState(images[0])
     const [updateStatus, setUpdateStatus] = useState(INITIAL_STATE);
+
+    const handleDelete = async () => {
+        setUpdateStatus({
+            ...updateStatus,
+            loading: true,
+        });
+
+        await deleteCar(data._id).then((res) => {
+            setUpdateStatus({
+                ...updateStatus,
+                loading: false,
+                succesfull: true,
+                message: 'Unidad eliminada con exito!'
+            });
+            setTimeout(() => {
+                router.back();
+                router.refresh();
+            }, 1000);
+        }).catch((err) => {
+            console.log(err);
+            setUpdateStatus({
+                ...updateStatus,
+                loading: false,
+                error: true,
+                message:'Ha ocurrido un error, vuelve a intentarlo más tarde.'
+            });
+        });
+    };
+
+    const handleSetFavorite = async () => {
+        setUpdateStatus({
+            ...updateStatus,
+            loading: true,
+        });
+        
+        const res = data.favorite ? await updateCar(data._id, {favorite: false}) : await updateCar(data._id, {favorite: true});
+        
+        if(res.data) {
+            setUpdateStatus({
+                ...updateStatus,
+                loading: false,
+                succesfull: true,
+                message: 'Información actualizada con exito!'
+            });
+            return router.refresh();
+        }
+        else {
+            setUpdateStatus({
+                ...updateStatus,
+                loading: false,
+                error: true,
+                message: 'Ha ocurrido un error, vuelve a intentarlo más tarde.'
+            });
+            return;
+        };
+    };
 
     const onClickCheckbox = async (item, index) => {
         const update = [...images];
@@ -158,17 +214,6 @@ export default function Detail ({data}) {
             return;
         };
     };
-    
-    
-    /* useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentImage((prev) => (prev + 1) % total);
-        }, 5000); 
-    
-        return () => {
-          clearInterval(interval); 
-        };
-      }, [total]); */
 
     return (
         <div className={styles.container}>
@@ -183,13 +228,13 @@ export default function Detail ({data}) {
                 </button>
                 <div style={{display: 'flex' , justifyContent: 'flex-end', gap: '30px'}}>
                     <label>
-                        <IconButton aria-label='delete' size='large' onClick={() => console.log('Destacando unidad...')}>
+                        <IconButton aria-label='favorite' size='large' onClick={handleSetFavorite}>
                             {data.favorite ? <FavoriteIcon fontSize='medium' sx={{color: 'red'}}/> : <FavoriteBorderIcon fontSize='medium'/>}
                         </IconButton>
                     </label>
                     <label>
-                        <IconButton aria-label='delete' size='large' onClick={() => console.log('Borrando unidad...')}>
-                            <DeleteIcon fontSize='medium' />
+                        <IconButton aria-label='delete' size='large' onClick={handleDelete} disabled={updateStatus.loading}>
+                            <DeleteIcon fontSize='medium'/>
                         </IconButton>
                     </label>
                 </div>
@@ -236,14 +281,14 @@ export default function Detail ({data}) {
 
             <div className={styles.info_section}>
                 <label>
-                    <h3>{data.name}</h3>
-                    <IconButton aria-label='edit' size="small" onClick={() => handleClick('Marca', {name: ''})}>
+                    <h3>{data.brand}</h3>
+                    <IconButton aria-label='edit' size="small" onClick={() => handleClick('Marca', {brand: ''})}>
                         <EditIcon fontSize='small'/>
                     </IconButton>
                 </label>
 
                 <label>
-                    <h4>Modelo: {data.model ? data.model : defaultModel[defaultModel.length -1]}</h4>
+                    <h4>Modelo: {data.model}</h4>
                     <IconButton aria-label='edit' size="small" onClick={() => handleClick('Modelo', {model: ''})}>
                         <EditIcon fontSize='small' />
                     </IconButton>

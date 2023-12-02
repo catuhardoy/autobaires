@@ -15,7 +15,6 @@ const CarDescription = () => {
   const useparams = useParams()
   // console.log(useparams)
   const carId = useparams.id; 
-  console.log(carId)
  
   const router = useRouter();
 
@@ -51,7 +50,7 @@ const CarDescription = () => {
       <div className={styles.left}>
           <div className={styles.item} key={car._id}>
             <div className={styles.imgContainer}>
-              <img src={car.photoURLs[currentImageIndex].url} alt={car.name} className={styles.img} />
+              <img src={car.photoURLs[currentImageIndex].url} alt={car.photoURLs[currentImageIndex].filename} className={styles.img} />
             </div>
    
             <div className={styles.thumbnailContainer}>
@@ -71,7 +70,7 @@ const CarDescription = () => {
       <div className={styles.right}>
           <div className={styles.content}>
             <div className={styles.title}>
-              <h1 className={styles.name}>{car.name}</h1>
+              <h1 className={styles.name}>{`${car.brand} ${car.model}`}</h1>
               <Image src = '/LOGO_AUTOBAIRES_03.png' alt='autobaires' width={100} height={60} style={{objectFit: 'cover'}} />
             </div>
             <p className={styles.data}><strong>Año:</strong> {car.year}</p>
