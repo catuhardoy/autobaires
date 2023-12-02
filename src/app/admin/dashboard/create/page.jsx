@@ -145,7 +145,7 @@ function CarCreate() {
         headers:{
           'Content-Type': 'application/json'
         },
-        body:JSON.stringify({name: brand, model, year, km, description, price, photoURLs})
+        body:JSON.stringify({brand, model, year, km, description, price, photoURLs})
       });
 
       if(res.ok) {

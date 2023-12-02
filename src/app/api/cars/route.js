@@ -7,10 +7,10 @@ import { deleteImage } from '@/libs/data';
           
 export async function POST(request) {
 
-    const {name, year, km, description, price, photoURLs} = await request.json();
+    const {brand, model, year, km, description, price, photoURLs} = await request.json();
 
     await connectMongoDB() ;
-    await Car.create({name, year, km, description, price, photoURLs}) ;
+    await Car.create({brand, model, year, km, description, price, photoURLs}) ;
     console.log("car created")
     return NextResponse.json({message: "Car Creates"}, {status: 201});
 
@@ -20,16 +20,7 @@ export async function GET() {
     await connectMongoDB();
     const cars = await Car.find();
     return NextResponse.json({ cars });
-  }
-
-/* export async function DELETE(request) {
-    const id = request.nextUrl.searchParams.get('id') || request.body.id;
-
-    await connectMongoDB() ;
-    await Car.findByIdAndDelete(id);
-
-    return NextResponse.json({message: "Car Deleted"}, {status: 200})
-} */
+};
 
 export async function DELETE (request) {
     const {id} = await request.json();

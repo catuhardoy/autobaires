@@ -10,17 +10,14 @@ const NewRevenues = async () => {
   } */
 
   const data = await fetchCars();
-  console.log(data);
-  const revenue = data.cars.slice(-3).reverse();
+  //console.log(data);
+  const revenue = data?.cars.slice(-3).reverse();
+  const favorites = data.cars.filter((item) => item.favorite);
   
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Últimos Ingresos</h2>
-      <div className={styles.cards}>
-        {revenue.map((revenue) => (
-          <Revenue key={revenue._id} revenue={revenue} />
-        ))}
-      </div>
+      <h2 className={styles.title}>{favorites ? 'Unidades destacadas' : 'Últimos Ingresos'}</h2>
+      <Revenue data={ favorites ? favorites : revenue }/>
     </div>
   );
 };
