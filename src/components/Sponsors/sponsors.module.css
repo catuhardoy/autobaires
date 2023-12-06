@@ -1,7 +1,7 @@
 @keyframes scroll {
 	0% { 
-        transform: translateX(calc(150px * 8)); 
-        -webkit-transform: translateX(calc(150px * 8));
+        transform: translateX(calc(150px * 10)); 
+        -webkit-transform: translateX(calc(150px * 10));
     }
 	100% { 
         transform: translateX(calc(-150px * 16));
@@ -72,9 +72,9 @@
     
 }
 
-.slider .slide_track::before {
-    /* background: linear-gradient(to right, rgb(0, 0, 0) 10px, transparent 80%, rgb(250, 250, 250) 30px); */
-}
+/* .slider .slide_track::before {
+    background: linear-gradient(to right, rgb(0, 0, 0) 10px, transparent 80%, rgb(250, 250, 250) 30px);
+} */
 	
 .slide {
     display: flex;
