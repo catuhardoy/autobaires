@@ -1,7 +1,6 @@
 import connectMongoDB from '@/libs/mongodb';
 import Car from '@/app/models/car';
 import { NextResponse , NextRequest } from "next/server";
-import { NextApiRequest, NextApiResponse } from 'next';
 import { deleteImage } from '@/libs/data';
 // import multer from 'multer';
           

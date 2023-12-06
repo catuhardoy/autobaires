@@ -69,15 +69,15 @@ const CarDescription = () => {
       {car && 
       <div className={styles.right}>
           <div className={styles.content}>
-            <div className={styles.title}>
-              <h1 className={styles.name}>{`${car.brand} ${car.model}`}</h1>
-              <Image src = '/LOGO_AUTOBAIRES_03.png' alt='autobaires' width={100} height={60} style={{objectFit: 'cover'}} />
-            </div>
+            {/* <div className={styles.image}>
+              <Image src = '/LOGO_AUTOBAIRES_03.png' alt='autobaires' width={140} height={80} style={{objectFit: 'cover'}} />
+            </div> */}
+            <h1 className={styles.name}>{`${car.brand} ${car.model}`}</h1>
             <p className={styles.data}><strong>Año:</strong> {car.year}</p>
             <p className={styles.data}><strong>Kilometros:</strong> {car.km}</p>
 
-            <p className={styles.desc}>{car.description}</p>  
-            <p className={styles.price}>{`$ ${car.price}`}</p>
+            <p className={styles.desc}><strong>Descripción:</strong> {car.description}</p>  
+            <p className={styles.price}><strong>{`$ ${car.price}`}</strong></p>
             
             <div className={styles.options_btn}>
               <Link href='/catalogo'>
