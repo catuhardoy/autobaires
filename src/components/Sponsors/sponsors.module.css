@@ -67,8 +67,8 @@
 .slide_track {
     display: flex;
     width: calc(150px * 12);
-    animation: scroll 30s linear infinite;
-    -webkit-animation: scroll 30s linear infinite;
+    animation: scroll 20s cubic-bezier(0.1, 0.6, 0.6, 0.4) infinite;
+    -webkit-animation: scroll 20s cubic-bezier(0.1, 0.6, 0.6, 0.4) infinite;
     
 }
 
