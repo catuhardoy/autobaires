@@ -2,6 +2,7 @@ import styles from './page.module.css'
 import ImageSlider from '@/components/ImageSlider/ImageSlider'
 import CardPair from '@/components/CardPair/CardPair'
 import Sponsors from '@/components/Sponsors/Sponsors'
+import BrandSlider from '@/components/Slider/BrandSlider'
 import NewRevenues from '@/components/NewRevenues/NewRevenues'
 import Video from '@/components/Video/Video'
 import ContactForm from '@/components/ContacForm/ContactForm'
@@ -18,6 +19,7 @@ export default function Home() {
       <ImageSlider/>
       <CardPair/>
       <Video/>
+      {/* <BrandSlider/> */}
       <Sponsors/>
       <NewRevenues/>
       <ContactForm/>

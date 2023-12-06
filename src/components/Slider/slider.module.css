@@ -1,0 +1,24 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100vw - 15px);
+    height: 200px;
+    box-sizing: border-box;    
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 150px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+}
+
+.item img {
+    object-fit: contain;
+    width: 150px;
+    height: 100px;
+}
